@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-
+import "./index.css";
 function App() {
   const [solves, setSolves] = useState(() => {
     const saved = localStorage.getItem('solves');
@@ -134,47 +134,29 @@ function App() {
 
   return (
     <div
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-        justifyContent: 'center',
-        background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
-        fontFamily: 'Inter, Arial, sans-serif',
-        gap: '2rem',
-      }}
+      className="min-h-screen flex flex-row items-start justify-center bg-gradient-to-br from-slate-50 to-slate-200 font-sans gap-8"
     >
       {/* Solves Table */}
       <div
-        style={{
-          background: '#fff',
-          borderRadius: '1.2rem',
-          boxShadow: '0 2px 12px 0 rgba(0,0,0,0.05)',
-          padding: '1.5rem 1rem',
-          minWidth: '320px',
-          maxHeight: '80vh',
-          overflowY: 'auto',
-          marginTop: '2rem',
-        }}
+        className="bg-white rounded-2xl shadow-md p-6 min-w-[320px] max-h-[80vh] overflow-y-auto mt-8"
       >
-        <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#3b82f6', marginBottom: '1rem', letterSpacing: '0.02em' }}>Solves</h2>
-        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.95rem' }}>
+  <h2 className="text-xl font-bold text-blue-500 mb-4 tracking-wide">Solves</h2>
+  <table className="w-full border-collapse text-[0.95rem]">
           <thead>
-            <tr style={{ color: '#64748b', fontWeight: 600 }}>
-              <th style={{ textAlign: 'left', padding: '0.3rem 0.5rem' }}>#</th>
-              <th style={{ textAlign: 'left', padding: '0.3rem 0.5rem' }}>Time</th>
-              <th style={{ textAlign: 'left', padding: '0.3rem 0.5rem' }}>Scramble</th>
+            <tr className="text-slate-500 font-semibold">
+              <th className="text-left px-2 py-1">#</th>
+              <th className="text-left px-2 py-1">Time</th>
+              <th className="text-left px-2 py-1">Scramble</th>
             </tr>
           </thead>
           <tbody>
             {solves.length === 0 ? (
-              <tr><td colSpan={3} style={{ color: '#94a3b8', textAlign: 'center', padding: '1rem' }}>No solves yet</td></tr>
+              <tr><td colSpan={3} className="text-slate-400 text-center p-4">No solves yet</td></tr>
             ) : (
               solves.map((solve, idx) => (
                 <tr
                   key={solve.date}
-                  style={{ borderBottom: '1px solid #f1f5f9', cursor: 'pointer', transition: 'background 0.2s' }}
+                  className="border-b border-slate-100 cursor-pointer transition-colors hover:bg-slate-50"
                   title="Click to delete this solve"
                   onClick={() => {
                     if (window.confirm('Are you sure you want to delete this solve?')) {
@@ -184,9 +166,9 @@ function App() {
                     }
                   }}
                 >
-                  <td style={{ padding: '0.3rem 0.5rem', color: '#222', fontWeight: 600 }}>{solves.length - idx}</td>
-                  <td style={{ padding: '0.3rem 0.5rem', color: '#3b82f6', fontWeight: 700 }}>{formatTime(solve.time)}</td>
-                  <td style={{ padding: '0.3rem 0.5rem', color: '#64748b', fontSize: '0.92rem', wordBreak: 'break-word' }}>{solve.scramble}</td>
+                  <td className="px-2 py-1 text-zinc-900 font-semibold">{solves.length - idx}</td>
+                  <td className="px-2 py-1 text-blue-500 font-bold">{formatTime(solve.time)}</td>
+                  <td className="px-2 py-1 text-slate-500 text-[0.92rem] break-words">{solve.scramble}</td>
                 </tr>
               ))
             )}
@@ -196,72 +178,31 @@ function App() {
 
       {/* Timer Card */}
       <div
-        style={{
-          background: '#fff',
-          borderRadius: '1.5rem',
-          boxShadow: '0 4px 24px 0 rgba(0,0,0,0.07)',
-          padding: '2.5rem 3rem',
-          marginTop: '2rem',
-          minWidth: '320px',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
+        className="bg-white rounded-3xl shadow-lg p-10 mt-8 min-w-[320px] flex flex-col items-center"
       >
         <h1
-          style={{
-            fontWeight: 700,
-            fontSize: '2.2rem',
-            marginBottom: '2.2rem',
-            letterSpacing: '0.02em',
-            color: '#222',
-          }}
+          className="font-bold text-3xl mb-9 tracking-wide text-zinc-900"
         >
-          rubiks<span style={{ color: '#3b82f6' }}>'</span>timer
+          rubiks<span className="text-blue-500">'</span>timer
         </h1>
         <div
-          style={{
-            fontSize: '1.3rem',
-            color: '#3b82f6',
-            fontWeight: 600,
-            marginBottom: '2rem',
-            letterSpacing: '0.04em',
-            userSelect: 'all',
-            textAlign: 'center',
-          }}
+          className="text-lg text-blue-500 font-semibold mb-8 tracking-wider select-all text-center"
         >
           {scramble}
         </div>
         <div
-          style={{
-            fontSize: '4.5rem',
-            fontWeight: 700,
-            letterSpacing: '0.05em',
-            marginBottom: '1.2rem',
-            color: fontColor,
-            transition: 'color 0.2s',
-            textShadow: '0 2px 8px rgba(59,130,246,0.08)',
-            userSelect: 'none',
-          }}
+          className={`text-[4.5rem] font-bold tracking-wider mb-5 transition-colors duration-200 select-none drop-shadow-[0_2px_8px_rgba(59,130,246,0.08)]`}
+          style={{ color: fontColor }}
         >
           {formatTime(time)}
         </div>
 
         {/* Averages */}
-        <div style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          gap: '1rem',
-          marginBottom: '1.2rem',
-          fontSize: '1.1rem',
-          color: '#64748b',
-          fontWeight: 500,
-        }}>
-          <div>Ao5: <span style={{ color: '#222', fontWeight: 700 }}>{ao5 !== null ? formatTime(ao5) : '-'}</span></div>
-          <div>Ao12: <span style={{ color: '#222', fontWeight: 700 }}>{ao12 !== null ? formatTime(ao12) : '-'}</span></div>
-          <div>Ao100: <span style={{ color: '#222', fontWeight: 700 }}>{ao100 !== null ? formatTime(ao100) : '-'}</span></div>
-          <div>Overall: <span style={{ color: '#222', fontWeight: 700 }}>{overall !== null ? formatTime(overall) : '-'}</span></div>
+        <div className="flex flex-row items-center gap-4 mb-5 text-[1.1rem] text-slate-500 font-medium">
+          <div>Ao5: <span className="text-zinc-900 font-bold">{ao5 !== null ? formatTime(ao5) : '-'}</span></div>
+          <div>Ao12: <span className="text-zinc-900 font-bold">{ao12 !== null ? formatTime(ao12) : '-'}</span></div>
+          <div>Ao100: <span className="text-zinc-900 font-bold">{ao100 !== null ? formatTime(ao100) : '-'}</span></div>
+          <div>Overall: <span className="text-zinc-900 font-bold">{overall !== null ? formatTime(overall) : '-'}</span></div>
         </div>
         {/* {lastSolve !== null && !isRunning && (
           <div
@@ -277,15 +218,9 @@ function App() {
           </div>
         )} */}
         <div
-          style={{
-            color: '#94a3b8',
-            fontSize: '1rem',
-            marginTop: '0.5rem',
-            letterSpacing: '0.01em',
-            fontWeight: 400,
-          }}
+          className="text-slate-400 text-base mt-2 tracking-tight font-normal"
         >
-          <span style={{ color: '#3b82f6', fontWeight: 700 }}>Space</span> — hold to prepare (red), keep holding for 3s for green, release to start
+          <span className="text-blue-500 font-bold">Space</span> — hold to prepare (red), keep holding for 3s for green, release to start
         </div>
       </div>
     </div>
