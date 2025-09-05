@@ -134,19 +134,20 @@ function App() {
 
   return (
     <div
-      className="min-h-screen flex flex-row items-start justify-center bg-gradient-to-br from-slate-50 to-slate-200 font-sans gap-8"
+      className="min-h-screen flex flex-col md:flex-row items-start md:items-start justify-center bg-gradient-to-br from-slate-50 to-slate-200 font-sans gap-4 md:gap-8 px-2 md:px-0"
     >
       {/* Solves Table */}
       <div
-        className="bg-white rounded-2xl shadow-md p-6 min-w-[320px] max-h-[80vh] overflow-y-auto mt-8"
+        className="bg-white rounded-2xl shadow-md w-full md:min-w-[320px] md:max-w-md max-h-[80vh] overflow-y-auto mt-4 md:mt-8 mb-4 md:mb-0"
       >
-  <h2 className="text-xl font-bold text-blue-500 mb-4 tracking-wide">Solves</h2>
-  <table className="w-full border-collapse text-[0.95rem]">
+        <h2 className="text-xl font-bold text-blue-500 tracking-wide p-2">Solves</h2>
+        <div className="overflow-x-auto">
+          <table className="min-w-full border-collapse text-[0.95rem]">
           <thead>
             <tr className="text-slate-500 font-semibold">
-              <th className="text-left px-2 py-1">#</th>
-              <th className="text-left px-2 py-1">Time</th>
-              <th className="text-left px-2 py-1">Scramble</th>
+              <th className="text-center md:text-left px-2 py-1">#</th>
+              <th className="text-center md:text-left px-2 py-1">Time</th>
+              <th className="text-center md:text-left px-2 py-1">Scramble</th>
             </tr>
           </thead>
           <tbody>
@@ -166,39 +167,40 @@ function App() {
                     }
                   }}
                 >
-                  <td className="px-2 py-1 text-zinc-900 font-semibold">{solves.length - idx}</td>
-                  <td className="px-2 py-1 text-blue-500 font-bold">{formatTime(solve.time)}</td>
-                  <td className="px-2 py-1 text-slate-500 text-[0.92rem] break-words">{solve.scramble}</td>
+                  <td className="px-2 py-1 text-center md:text-left text-zinc-900 font-semibold">{solves.length - idx}</td>
+                  <td className="px-2 py-1 text-center md:text-left text-blue-500 font-bold">{formatTime(solve.time)}</td>
+                  <td className="px-2 py-1 text-center md:text-left text-slate-500 text-[0.92rem] break-words">{solve.scramble}</td>
                 </tr>
               ))
             )}
           </tbody>
         </table>
+        </div>
       </div>
 
       {/* Timer Card */}
       <div
-        className="bg-white rounded-3xl shadow-lg p-10 mt-8 min-w-[320px] flex flex-col items-center"
+        className="bg-white rounded-3xl shadow-lg w-full md:min-w-[320px] md:max-w-xl p-4 md:p-10 mt-0 md:mt-8 flex flex-col items-center"
       >
         <h1
-          className="font-bold text-3xl mb-9 tracking-wide text-zinc-900"
+          className="font-bold text-2xl md:text-3xl mb-6 md:mb-9 tracking-wide text-zinc-900"
         >
           rubiks<span className="text-blue-500">'</span>timer
         </h1>
         <div
-          className="text-lg text-blue-500 font-semibold mb-8 tracking-wider select-all text-center"
+          className="text-base md:text-lg text-blue-500 font-semibold mb-6 md:mb-8 tracking-wider select-all text-center"
         >
           {scramble}
         </div>
         <div
-          className={`text-[4.5rem] font-bold tracking-wider mb-5 transition-colors duration-200 select-none drop-shadow-[0_2px_8px_rgba(59,130,246,0.08)]`}
+          className={`text-[2.5rem] md:text-[4.5rem] font-bold tracking-wider mb-4 md:mb-5 transition-colors duration-200 select-none drop-shadow-[0_2px_8px_rgba(59,130,246,0.08)]`}
           style={{ color: fontColor }}
         >
           {formatTime(time)}
         </div>
 
         {/* Averages */}
-        <div className="flex flex-row items-center gap-4 mb-5 text-[1.1rem] text-slate-500 font-medium">
+        <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 mb-4 md:mb-5 text-base md:text-[1.1rem] text-slate-500 font-medium">
           <div>Ao5: <span className="text-zinc-900 font-bold">{ao5 !== null ? formatTime(ao5) : '-'}</span></div>
           <div>Ao12: <span className="text-zinc-900 font-bold">{ao12 !== null ? formatTime(ao12) : '-'}</span></div>
           <div>Ao100: <span className="text-zinc-900 font-bold">{ao100 !== null ? formatTime(ao100) : '-'}</span></div>
