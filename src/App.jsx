@@ -167,9 +167,9 @@ function App() {
                     }
                   }}
                 >
-                  <td className="px-2 py-1 text-center md:text-left text-zinc-900 font-semibold">{solves.length - idx}</td>
-                  <td className="px-2 py-1 text-center md:text-left text-blue-500 font-bold">{formatTime(solve.time)}</td>
-                  <td className="px-2 py-1 text-center md:text-left text-slate-500 text-[0.92rem] break-words">{solve.scramble}</td>
+                  <td className="p-2 text-center md:text-left text-zinc-900 font-semibold">{solves.length - idx}</td>
+                  <td className="p-2 text-center md:text-left text-blue-500 font-bold">{formatTime(solve.time)}</td>
+                  <td className="p-2 text-center md:text-left text-slate-500 text-[0.92rem] break-words">{solve.scramble}</td>
                 </tr>
               ))
             )}
