@@ -250,9 +250,9 @@ function App() {
         {/* Averages */}
         <div style={{
           display: 'flex',
-          flexDirection: 'column',
+          flexDirection: 'row',
           alignItems: 'center',
-          gap: '0.3rem',
+          gap: '1rem',
           marginBottom: '1.2rem',
           fontSize: '1.1rem',
           color: '#64748b',
