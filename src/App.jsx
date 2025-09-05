@@ -1,6 +1,23 @@
 import React, { useState, useRef, useEffect } from 'react';
 import "./index.css";
 function App() {
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+
+  useEffect(() => {
+    // Add or remove dark mode class on <html> tag
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    // Store user preference in localStorage
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
+
   const [solves, setSolves] = useState(() => {
     const saved = localStorage.getItem('solves');
     return saved ? JSON.parse(saved) : [];    
@@ -136,6 +153,12 @@ function App() {
     <div
       className="min-h-screen flex flex-col md:flex-row items-start md:items-start justify-center bg-gradient-to-br from-slate-50 to-slate-200 font-sans gap-4 md:gap-8 px-2 md:px-0"
     >
+      <button
+        onClick={toggleTheme}
+        className='absolute top-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition'
+      >
+        {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+      </button>
       {/* Solves Table */}
       <div
         className="bg-white rounded-2xl shadow-md w-full md:min-w-[320px] md:max-w-md max-h-[80vh] overflow-y-auto mt-4 md:mt-8 mb-4 md:mb-0"
