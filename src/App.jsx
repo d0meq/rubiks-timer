@@ -35,7 +35,7 @@ function App() {
   const ao5 = solves.length >= 5 ? getAverage(getLastTimes(5)) : null;
   const ao12 = solves.length >= 12 ? getAverage(getLastTimes(12)) : null;
   const ao100 = solves.length >= 100 ? getAverage(getLastTimes(100)) : null;
-  const overall = solves.length > 0 ? getAverage(solves.map(s => s.time)) : null;
+  const overall = solves.length > 0 ? getAverage(solves.map(s => s.time)) : null; 
 
   // Scramble generator for 3x3
   const moves = ['R', 'L', 'U', 'D', 'F', 'B'];
@@ -92,7 +92,7 @@ function App() {
         setSpaceHoldStart(Date.now());
         greenTimeoutRef.current = greenTimeoutRef + setTimeout(() => {
           setFontColor('green');
-        }, 2000);
+        }, 1000);
         // Only reset timer to 0 if not running (i.e. after stop)
         if (!isRunning) {
           setTime(0);
@@ -104,7 +104,7 @@ function App() {
         spacePressedRef.current = false;
         clearTimeout(greenTimeoutRef.current);
         const holdDuration = Date.now() - spaceHoldStart;
-        if (holdDuration >= 2000) {
+        if (holdDuration >= 1000) {
           setIsRunning(true); // Start timer only if held for 3s
         }
         setFontColor('#222');
@@ -229,23 +229,11 @@ function App() {
           <div>Ao100: <span className="text-zinc-900 font-bold">{ao100 !== null ? formatTime(ao100) : '-'}</span></div>
           <div>Overall: <span className="text-zinc-900 font-bold">{overall !== null ? formatTime(overall) : '-'}</span></div>
         </div>
-        {/* {lastSolve !== null && !isRunning && (
-          <div
-            style={{
-              color: '#64748b',
-              fontSize: '1.2rem',
-              marginBottom: '1.2rem',
-              fontWeight: 500,
-              letterSpacing: '0.01em',
-            }}
-          >
-            Last solve: <span style={{ color: '#222', fontWeight: 700 }}>{formatTime(lastSolve)}</span>
-          </div>
-        )} */}
+        
         <div
           className="text-slate-400 text-base mt-2 tracking-tight font-normal"
         >
-          <span className="text-blue-500 font-bold">Space</span> — hold to prepare (red), keep holding for 3s for green, release to start
+          <span>Best solve:</span>
         </div>
       </div>
     </div>
